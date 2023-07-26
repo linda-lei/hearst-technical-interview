@@ -1,0 +1,55 @@
+﻿Database Tables:
+* Retailers:
+   * retailer_id (Primary Key)
+   * retailer_name
+   * retailer_website
+   * ...
+* Products:
+   * product_id (Primary Key)
+   * product_name
+   * product_description
+   * ...
+* Offerings:
+   * offering_id (Primary Key)
+   * retailer_id (Foreign Key referencing Retailers)
+   * product_id (Foreign Key referencing Products)
+   * price
+   * offering_url
+   * date_added
+   * ...
+  
+        +--------------+                   +---------------+
+         |  Retailers   |                   |   Products    |
+         +--------------+                   +---------------+
+         | retailer_id  |                    |  product_id        |
+         | retailer_name|                | product_name  |
+         | retailer_website |            | product_desc   |
+         | ...          |                         | ...                      |
+         +--------------+                   +---------------+
+               |                                  |
+               |                                  |
+               |                                  |
+               |                                  |
+               |                                  |
+               |                                  |
+               |                                  |
+               |                                  |
+               |                                  |
+               |                                  |
+               |                                  |
+               |                                  |
+         +--------------+                   +---------------+
+         |  Offerings   |-------------->|   Products    |
+         +--------------+                   +---------------+
+         | offering_id  |                   |  product_id   |
+         | retailer_id  |                    | product_name  |
+         | product_id   |                  | product_desc  |
+         | price        |                      | ...           |
+         | offering_url |                  +---------------+
+         | date_added   |
+         | ...          |
+         +--------------+
+
+
+NoSQL
+-document data access pattern: use product SKU column combined with retailer name as a composite access key to the document to avoid document scan
